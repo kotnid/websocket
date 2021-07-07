@@ -9,5 +9,10 @@ async def hello(uri):
         name = await websocket.recv()
         print(f"recv : {name}")
 
+async def get(uri):
+    async with websockets.connect(uri) as websocket:
+        while True:
+            msg = await websocket.recv()
+            print(f"recv:{msg}")
 asyncio.get_event_loop().run_until_complete(
-    hello('ws://localhost:8964'))
+    get('ws://127.0.0.1:8964/'))
